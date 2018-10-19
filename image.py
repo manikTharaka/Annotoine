@@ -1,6 +1,7 @@
 from PIL import Image
 from PIL.ImageQt import ImageQt
 import os
+from logging import debug as log 
 
 class ImageHandler:
     def __init__(self,fnames):
@@ -21,6 +22,7 @@ class ImageHandler:
         for i in range(self.last_load,end):      
             self.images.append(self.load_img(self.fnames[i]))
         
+        log('Images loaded')
         self.last_load = end
     
     def next_img(self):

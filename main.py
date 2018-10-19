@@ -7,9 +7,11 @@ import os
 import cv2
 import random
 import numpy as np
-import trim_video
 import main_ui
 from image import ImageHandler
+import logging 
+from logging import debug as log
+
 
 class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
 
@@ -22,6 +24,7 @@ class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
         self.actionNext.setDisabled(True)
         self.fname = None
         self.Images = None
+        log('Application started')
 
     def openVideo(self):
         self.fname,_ = QFileDialog.getOpenFileName(self, "Open file", "", "Video Files (*.avi);All files (*.*)")
@@ -40,7 +43,6 @@ class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
         dirname = QFileDialog.getExistingDirectory(self, "Select Directory")
         
         fnames = [os.path.join(dirname,name) for name in os.listdir(dirname) if name.endswith('.jpg') or name.endswith('.png')]
-        print(fnames)
         self.Images = ImageHandler(fnames)
         
         self.setCurrentImage(self.Images.getCurrent())
@@ -49,7 +51,11 @@ class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
         
 
 if __name__ == '__main__':
-    
+
+    if len(sys.argv) > 1 and sys.argv[1]=='-d':
+        logging.basicConfig(level=logging.DEBUG)
+        log(sys.argv)
+
     app = QApplication(sys.argv)
     app.setApplicationName("T200")
 

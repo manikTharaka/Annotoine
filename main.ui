@@ -39,6 +39,7 @@
     </property>
     <addaction name="openVideoAction"/>
     <addaction name="openImageAction"/>
+    <addaction name="actionSave"/>
    </widget>
    <addaction name="menuFile"/>
   </widget>
@@ -74,10 +75,18 @@
   <action name="actionNext">
    <property name="icon">
     <iconset>
-     <normaloff>res/next.png</normaloff>res/next.png</iconset>
+     <normaloff>../Anno/res/next.png</normaloff>../Anno/res/next.png</iconset>
    </property>
    <property name="text">
     <string>Next</string>
+   </property>
+   <property name="shortcut">
+    <string>Right</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
    </property>
   </action>
  </widget>
