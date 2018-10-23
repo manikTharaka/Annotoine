@@ -22,15 +22,17 @@ class ImageHandler:
         for i in range(self.last_load,end):      
             self.images.append(self.load_img(self.fnames[i]))
         
-        log('Images loaded')
-        self.last_load = end
+        self.last_load = end-1
+        log('last batch load upto '+str(self.last_load))
+        
     
     def next_img(self):
         if self.current < self.last_load:
             self.current += 1
+            log('Current: '+str(self.current))
             return self.images[self.current]
         else:
-            pass
+            raise NotImplementedError()
     
     def getCurrent(self):
         return self.images[self.current]

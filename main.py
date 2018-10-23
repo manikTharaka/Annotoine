@@ -11,6 +11,7 @@ import main_ui
 from image import ImageHandler
 import logging 
 from logging import debug as log
+from tools import RectangleTool
 
 
 class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
@@ -22,9 +23,28 @@ class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
         self.openImageAction.triggered.connect(self.openImageFolder)
         self.actionNext.triggered.connect(self.next)
         self.actionNext.setDisabled(True)
+        self.actionRectangle.triggered.connect(self.selectRectTool)
         self.fname = None
         self.Images = None
+        self.curent_tool= None
+        self.rectangle = RectangleTool()
+
+        self.setMouseTracking(True)
         log('Application started')
+
+    def mouseMoveEvent(self, e):
+        x = e.x()
+        y = e.y()
+        
+        text = "x: {0},  y: {1}".format(x, y)
+        log(self.ImLabel.width() > x)
+        
+    
+    def mousePressEvent(self,e):
+        log('mouse pressed')
+    
+    def mouseReleaseEvent(self,e):
+        log('mouse released')
 
     def openVideo(self):
         self.fname,_ = QFileDialog.getOpenFileName(self, "Open file", "", "Video Files (*.avi);All files (*.*)")
@@ -48,7 +68,9 @@ class MainWindow(QMainWindow,main_ui.Ui_MainWindow):
         self.setCurrentImage(self.Images.getCurrent())
         self.actionNext.setDisabled(False)
         
-        
+    def selectRectTool(self):
+        self.curent_tool = self.rectangle
+        log('Rectangle selected')
 
 if __name__ == '__main__':
 

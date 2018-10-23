@@ -66,6 +66,9 @@
    <property name="text">
     <string>Open Images</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionRectangle">
    <property name="text">
